@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+core-field {
+  border: solid 2px #eee;
+  border-radius: 5px;
+}
+
+core-field core-icon {
+  color: #aaa;
+}
+
+core-field input {
+  width: 100%
+}
