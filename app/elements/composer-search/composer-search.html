@@ -12,7 +12,7 @@
     byot (bring your own template)
  -->
 
-<polymer-element name="composer-search" attributes="url, per_page, autofocus, placeholder">
+<polymer-element name="composer-search" attributes="url, per_page, autofocus, placeholder, results">
 
   <template>
     <link rel="stylesheet" href="composer-search.css">
@@ -37,7 +37,7 @@
           name="ajax"
           url="{{url}}?q={{searchString}}&per_page={{per_page}}"
           handleAs="json"
-          response="{{response}}"></core-ajax>
+          response="{{results}}"></core-ajax>
       </div>
     </form>
   </template>
@@ -47,24 +47,22 @@
       'use strict';
 
       Polymer({
-        // define element prototype here
+
         url: 'http://opendata.arcgis.com',
         per_page: 10,
         autofocus: true,
         placeholder: 'Search for Open Data',
         searchString: '',
 
-        // ready: function () {
-        //   debugger;
-        // },
-
         onSubmit: function (e) {
           e.preventDefault();
+          this.fire('search-before-start', this.results);
           this.$.ajax.go();
+          this.fire('search-after-start', this.results);
         },
 
-        responseChanged: function (oldVal) {
-          this.fire('search-completed', this.response);
+        resultsChanged: function (oldVal) {
+          this.fire('search-completed', this.results);
         }
 
       });
