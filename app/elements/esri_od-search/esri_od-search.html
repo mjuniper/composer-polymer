@@ -9,8 +9,6 @@
     scripts in separate files
     where do results link to / events for loading locally...???
     should the url not have /datasets??
-    change element prefixes from composer to esri_od???
-    namespace custom events (esri_od?)
     look at styling it from outside
     need to share the url among the components??? - https://www.polymer-project.org/docs/polymer/polymer.html#global
 
@@ -23,10 +21,10 @@
     write a story for this... (search agol items?)
  -->
 
-<polymer-element name="composer-search" attributes="url, per_page, autofocus, placeholder, results">
+<polymer-element name="esri_od-search" attributes="url, per_page, autofocus, placeholder, results">
 
   <template>
-    <link rel="stylesheet" href="composer-search.css">
+    <link rel="stylesheet" href="esri_od-search.css">
 
     <form action="{{url}}" 
           autocomplete="off" 
@@ -53,6 +51,6 @@
     </form>
   </template>
 
-  <script src="composer-search.js"></script>
+  <script src="esri_od-search.js"></script>
 
 </polymer-element>

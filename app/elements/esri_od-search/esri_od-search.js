@@ -12,13 +12,13 @@
     onSubmit: function (e) {
       e.preventDefault();
       
-      this.fire('search-before-start', this.results);
+      this.fire('esri_od:search-before-start', this.results);
       this.$.ajax.go();
-      this.fire('search-after-start', this.results);
+      this.fire('esri_od:search-after-start', this.results);
     },
 
     resultsChanged: function (oldVal) {
-      this.fire('search-completed', this.results);
+      this.fire('esri_od:search-completed', this.results);
     }
 
   });

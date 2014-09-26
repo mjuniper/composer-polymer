@@ -1,8 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="composer-search-result" attributes="dataset">
+<polymer-element name="esri_od-search-result" attributes="dataset">
   <template>
-    <link rel="stylesheet" href="composer-search-result.css">
+    <link rel="stylesheet" href="esri_od-search-result.css">
 
     <li class="dataset-item" data-itemid="{{dataset.id}}">
       <div>
@@ -13,7 +13,7 @@
       </div>
       <div>
         <div class="dataset-thumb">
-          <img src="{{ dataset.thumbnail_url || 'elements/composer-search-results/default-dataset-thumb.png' }}">
+          <img src="{{ dataset.thumbnail_url || 'elements/esri_od-search-results/default-dataset-thumb.png' }}">
         </div>
         <div class="result-main">
           <div class="snippet">
@@ -24,6 +24,6 @@
     </li>
   </template>
   
-  <script src="composer-search-result.js"></script>
+  <script src="esri_od-search-result.js"></script>
 
 </polymer-element>

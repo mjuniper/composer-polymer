@@ -3,13 +3,13 @@
 
   Polymer({
 
-    searchEl: 'composer-search',
+    searchEl: 'esri_od-search',
     spinner: true,
 
     ready: function () {
       var searchComponent = document.querySelector(this.searchEl);
-      searchComponent.addEventListener('search-before-start', this.showLoading.bind(this));
-      searchComponent.addEventListener('search-completed', this.handleResults.bind(this));
+      searchComponent.addEventListener('esri_od:search-before-start', this.showLoading.bind(this));
+      searchComponent.addEventListener('esri_od:search-completed', this.handleResults.bind(this));
     },
 
     showLoading: function (evt) {
