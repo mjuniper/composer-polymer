@@ -3,21 +3,12 @@
 
   Polymer({
 
-    //dataset: {},
-
-    ready: function () {
-      this.dataset = {
-        name: 'jupe'
-      };
-    },
-
-    datasetChanged: function () {
-      debugger;
+    created: function () {
+      this.item = {};
     },
 
     onItemClick: function (evt) {
-      debugger;
-      this.fire('item-clicked', evt.detail);
+      this.fire('esri_od:search-result:item-clicked', evt.detail);
     }
 
   });

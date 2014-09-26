@@ -1,23 +1,23 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="esri_od-search-result" attributes="dataset">
+<polymer-element name="esri_od-search-result" attributes="item">
   <template>
     <link rel="stylesheet" href="esri_od-search-result.css">
 
-    <li class="dataset-item" data-itemid="{{dataset.id}}">
+    <li class="dataset-item" data-itemid="{{item.id}}">
       <div>
         <h3 class="card-title" on-click="{{onItemClick}}">
-          {{ dataset.name }}
+          {{ item.name }}
         </h3>
-        <em><small>from {{dataset.main_group_title}}</small></em>
+        <em><small>from {{item.main_group_title}}</small></em>
       </div>
       <div>
         <div class="dataset-thumb">
-          <img src="{{ dataset.thumbnail_url || 'elements/esri_od-search-results/default-dataset-thumb.png' }}">
+          <img src="{{ item.thumbnail_url || 'elements/esri_od-search-results/default-dataset-thumb.png' }}">
         </div>
         <div class="result-main">
           <div class="snippet">
-            {{dataset.description}}
+            {{item.description}}
           </div>
         </div>
       </div>

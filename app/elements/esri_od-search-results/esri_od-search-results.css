@@ -7,7 +7,7 @@
 }
 
 
-:host .dataset-thumb {
+/*:host .dataset-thumb {
   float: left;
 }
 
@@ -26,4 +26,4 @@
 :host .dataset-item h3 {
   margin: 0;
   cursor: pointer;
-}
+}*/
