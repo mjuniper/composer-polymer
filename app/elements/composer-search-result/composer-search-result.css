@@ -1,11 +1,3 @@
-:host {
-  display: block;
-}
-
-:host ul {
-  list-style: none;
-}
-
 
 :host .dataset-thumb {
   float: left;

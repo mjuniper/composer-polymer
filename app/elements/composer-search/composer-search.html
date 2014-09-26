@@ -6,10 +6,21 @@
 
 <!-- 
   TODO:
-    use core-field or paper-input
+    scripts in separate files
+    where do results link to / events for loading locally...???
+    should the url not have /datasets??
+    change element prefixes from composer to esri_od???
+    namespace custom events (esri_od?)
+    look at styling it from outside
+    need to share the url among the components??? - https://www.polymer-project.org/docs/polymer/polymer.html#global
+
+    dataset-details element - composed of several smaller elements
     autocomplete
-    stuff search results into localstorage
-    byot (bring your own template)
+    map results element
+    
+    stuff search results into localstorage?
+    byot (bring your own template) for result items
+    write a story for this... (search agol items?)
  -->
 
 <polymer-element name="composer-search" attributes="url, per_page, autofocus, placeholder, results">
@@ -42,32 +53,6 @@
     </form>
   </template>
 
-  <script>
-    (function () {
-      'use strict';
-
-      Polymer({
-
-        url: 'http://opendata.arcgis.com',
-        per_page: 10,
-        autofocus: true,
-        placeholder: 'Search for Open Data',
-        searchString: '',
-
-        onSubmit: function (e) {
-          e.preventDefault();
-          this.fire('search-before-start', this.results);
-          this.$.ajax.go();
-          this.fire('search-after-start', this.results);
-        },
-
-        resultsChanged: function (oldVal) {
-          this.fire('search-completed', this.results);
-        }
-
-      });
-
-    })();
-  </script>
+  <script src="composer-search.js"></script>
 
 </polymer-element>

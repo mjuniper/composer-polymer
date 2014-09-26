@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="composer-search-result" attributes="dataset">
+  <template>
+    <link rel="stylesheet" href="composer-search-result.css">
+
+    <li class="dataset-item" data-itemid="{{dataset.id}}">
+      <div>
+        <h3 class="card-title" on-click="{{onItemClick}}">
+          {{ dataset.name }}
+        </h3>
+        <em><small>from {{dataset.main_group_title}}</small></em>
+      </div>
+      <div>
+        <div class="dataset-thumb">
+          <img src="{{ dataset.thumbnail_url || 'elements/composer-search-results/default-dataset-thumb.png' }}">
+        </div>
+        <div class="result-main">
+          <div class="snippet">
+            {{dataset.description}}
+          </div>
+        </div>
+      </div>
+    </li>
+  </template>
+  
+  <script src="composer-search-result.js"></script>
+
+</polymer-element>

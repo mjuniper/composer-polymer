@@ -1,59 +1,36 @@
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../composer-search-result/composer-search-result.html">
 
 <polymer-element name="composer-search-results" attributes="searchEl, spinner, results">
   <template>
     <link rel="stylesheet" href="composer-search-results.css">
 
     <paper-spinner id="spinner"></paper-spinner>
-    <template repeat="{{dataset in results.data}}">
       <ul>
-        <li data-itemid="{{dataset.id}}">
-         <div class="dataset-thumb">
-          <a href="/datasets/{{ dataset.id }}" title="{{ dataset.name }}">
-            <img src="{{ dataset.thumbnail_url || 'elements/composer-search-results/default-dataset-thumb.png' }}">
-          </a>
-         </div>
-
-          <div class="card-title">
-            <a class="dataset-link" href="/datasets/{{dataset.id}}"> {{ dataset.name }} </a> 
-            <em>from {{dataset.main_group_title}}</em>
-          </div>
-          <div class="result-main">
-            <div class="snippet">
-              {{dataset.description}}
+        <template repeat="{{dataset in results.data}}">
+          <!-- <composer-search-result dataset="{{dataset}}"></composer-search-result> -->
+          <li class="dataset-item" data-itemid="{{dataset.id}}">
+            <div>
+              <h3 class="card-title" on-click="{{onItemClick}}">
+                {{ dataset.name }}
+              </h3>
+              <em><small>from {{dataset.main_group_title}}</small></em>
             </div>
-          </div>
-        </li>
+            <div>
+              <div class="dataset-thumb">
+                <img src="{{ dataset.thumbnail_url || 'elements/composer-search-results/default-dataset-thumb.png' }}">
+              </div>
+              <div class="result-main">
+                <div class="snippet">
+                  {{dataset.description}}
+                </div>
+              </div>
+            </div>
+          </li>
+        </template>
       </ul>
-    </template>
   </template>
-  <script>
-    (function () {
-      'use strict';
+  
+  <script src="composer-search-results.js"></script>
 
-      Polymer({
-
-        searchEl: 'composer-search',
-        spinner: true,
-
-        ready: function () {
-          var searchComponent = document.querySelector(this.searchEl);
-          searchComponent.addEventListener('search-before-start', this.showLoading.bind(this));
-          searchComponent.addEventListener('search-completed', this.handleResults.bind(this));
-        },
-
-        showLoading: function (evt) {
-          if (this.spinner) {
-            this.$.spinner.active = true;
-          }
-        },
-
-        handleResults: function (evt) {
-          this.results = evt.detail;
-          setTimeout(function () { this.$.spinner.active = false; }.bind(this), 500);
-        }
-      });
-
-    })();
-  </script>
 </polymer-element>
