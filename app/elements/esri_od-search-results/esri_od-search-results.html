@@ -8,25 +8,7 @@
     <paper-spinner id="spinner"></paper-spinner>
       <ul>
         <template repeat="{{dataset in results.data}}">
-          <!-- <esri_od-search-result dataset="{{dataset}}"></esri_od-search-result> -->
-          <li class="dataset-item" data-itemid="{{dataset.id}}">
-            <div>
-              <h3 class="card-title" on-click="{{onItemClick}}">
-                {{ dataset.name }}
-              </h3>
-              <em><small>from {{dataset.main_group_title}}</small></em>
-            </div>
-            <div>
-              <div class="dataset-thumb">
-                <img src="{{ dataset.thumbnail_url || 'elements/esri_od-search-results/default-dataset-thumb.png' }}">
-              </div>
-              <div class="result-main">
-                <div class="snippet">
-                  {{dataset.description}}
-                </div>
-              </div>
-            </div>
-          </li>
+          <esri_od-search-result item="{{dataset}}"></esri_od-search-result>
         </template>
       </ul>
   </template>

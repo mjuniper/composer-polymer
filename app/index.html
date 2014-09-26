@@ -1,34 +1,39 @@
 <!doctype html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Polymer WebApp</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Polymer WebApp</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild-->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
 
-  <script src="bower_components/platform/platform.js"></script>
-  <!-- build:vulcanized elements/elements.vulcanized.html -->
-  <link rel="import" href="elements/elements.html">
-  <!-- endbuild-->
-</head>
+    <script src="bower_components/platform/platform.js"></script>
+    <!-- build:vulcanized elements/elements.vulcanized.html -->
+    <link rel="import" href="elements/elements.html">
+    <!-- endbuild-->
+  </head>
 
-<body unresolved>
+  <body unresolved>
 
-  <div class="search-unit">
-    <esri_od-search id="od-search" url="http://localdata.arcgis.com/datasets/" per_page="20"></esri_od-search>
-  </div>
+    <div class="search-unit">
+      <esri_od-search id="od-search" url="http://localdata.arcgis.com/datasets/" per_page="20"></esri_od-search>
+    </div>
 
-  <div class="results-unit">
-    <esri_od-search-summary searchEl="#od-search"></esri_od-search-summary>
-    <esri_od-search-results searchEl="#od-search" spinner="false"></esri_od-search-results>
-  </div>
-</body>
+    <div class="results-unit">
+      <esri_od-search-summary searchEl="#od-search">
+        <template if="{{results.data.length}}">
+          <div>Showing <strong>{{results.data.length}}</strong> of <strong>{{results.metadata.stats.total_count}}</strong> matching <strong>{{results.metadata.query_parameters.q}}</strong>!</div>
+        </template>
+      </esri_od-search-summary>
+      <esri_od-search-results searchEl="#od-search" spinner="false"></esri_od-search-results>
+    </div>
+    
+  </body>
 
 </html>
