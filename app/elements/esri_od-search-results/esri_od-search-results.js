@@ -8,8 +8,8 @@
 
     ready: function () {
       var searchComponent = document.querySelector(this.searchEl);
-      searchComponent.addEventListener('esri_od:search:before-start', this.showLoading.bind(this));
-      searchComponent.addEventListener('esri_od:search:completed', this.handleResults.bind(this));
+      searchComponent.addEventListener('esri_od:search:start', this.showLoading.bind(this));
+      searchComponent.addEventListener('esri_od:search:complete', this.handleResults.bind(this));
     },
 
     showLoading: function (evt) {

@@ -22,14 +22,13 @@
   <body unresolved>
 
     <div class="search-unit">
+      <esri_od-search-field></esri_od-search-field>
       <esri_od-search id="od-search" url="http://jupenew.dc.opendatadev.arcgis.com/datasets/" per_page="20"></esri_od-search>
     </div>
 
     <div class="results-unit">
-      <esri_od-search-summary searchEl="#od-search">
-        <template if="{{results.data.length}}"></template>
-      </esri_od-search-summary>
-      <esri_od-search-results searchEl="#od-search" spinner="false"></esri_od-search-results>
+      <esri_od-search-summary></esri_od-search-summary>
+      <esri_od-search-results spinner="false"></esri_od-search-results>
     </div>
     
   </body>

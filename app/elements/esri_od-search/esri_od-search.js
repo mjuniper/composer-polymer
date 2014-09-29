@@ -3,22 +3,23 @@
 
   Polymer({
 
+    searchEl: 'esri_od-search-field',
     url: 'http://opendata.arcgis.com',
     per_page: 10,
-    autofocus: true,
-    placeholder: 'Search for Open Data',
-    searchString: '',
 
-    onSubmit: function (e) {
-      e.preventDefault();
-      
-      this.fire('esri_od:search:before-start', this.results);
+    ready: function () {
+      var searchField = document.querySelector(this.searchEl);
+      searchField.addEventListener('esri_od:search:before-start', this.search.bind(this));
+    },
+
+    search: function (evt) {
+      this.searchString = evt.detail;
       this.$.ajax.go();
-      this.fire('esri_od:search:after-start', this.results);
+      this.fire('esri_od:search:start', this.searchString);
     },
 
     resultsChanged: function (oldVal) {
-      this.fire('esri_od:search:completed', this.results);
+      this.fire('esri_od:search:complete', this.results);
     }
 
   });
