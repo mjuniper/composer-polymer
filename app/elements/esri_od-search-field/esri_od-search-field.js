@@ -10,7 +10,7 @@
 
     domReady: function () {
       var url = document.querySelector(this.searchEl).url;
-      //this.initTypeahead(url);
+      this.initTypeahead(url);
     },
 
     onSubmit: function (e) {
