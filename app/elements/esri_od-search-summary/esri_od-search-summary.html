@@ -3,11 +3,12 @@
 <polymer-element name="esri_od-search-summary" attributes="searchEl, spinner, results">
   <template>
     <link rel="stylesheet" href="esri_od-search-summary.css">
-
+    
     <paper-spinner id="spinner"></paper-spinner>
     <template if="{{results.data.length}}">
       <div>Showing <strong>{{results.data.length}}</strong> of <strong>{{results.metadata.stats.total_count}}</strong> matching <strong>{{results.metadata.query_parameters.q}}</strong>.</div>
     </template>
+
   </template>
   
   <script src="esri_od-search-summary.js"></script>
