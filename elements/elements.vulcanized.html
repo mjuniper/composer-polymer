@@ -653,6 +653,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>Polymer("core-ajax",{url:"",handleAs:"",auto:false,params:"",response:null,error:null,method:"",headers:null,body:null,contentType:"application/x-www-form-urlencoded",withCredentials:false,xhrArgs:null,ready:function(){this.xhr=document.createElement("core-xhr")},receive:function(response,xhr){if(this.isSuccess(xhr)){this.processResponse(xhr)}else{this.processError(xhr)}this.complete(xhr)},isSuccess:function(xhr){var status=xhr.status||0;return!status||status>=200&&status<300},processResponse:function(xhr){var response=this.evalResponse(xhr);if(xhr===this.activeRequest){this.response=response}this.fire("core-response",{response:response,xhr:xhr})},processError:function(xhr){var response=xhr.status+": "+xhr.responseText;if(xhr===this.activeRequest){this.error=response}this.fire("core-error",{response:response,xhr:xhr})},complete:function(xhr){this.fire("core-complete",{response:xhr.status,xhr:xhr})},evalResponse:function(xhr){return this[(this.handleAs||"text")+"Handler"](xhr)},xmlHandler:function(xhr){return xhr.responseXML},textHandler:function(xhr){return xhr.responseText},jsonHandler:function(xhr){var r=xhr.responseText;try{return JSON.parse(r)}catch(x){console.warn("core-ajax caught an exception trying to parse response as JSON:");console.warn("url:",this.url);console.warn(x);return r}},documentHandler:function(xhr){return xhr.response},blobHandler:function(xhr){return xhr.response},arraybufferHandler:function(xhr){return xhr.response},urlChanged:function(){if(!this.handleAs){var ext=String(this.url).split(".").pop();switch(ext){case"json":this.handleAs="json";break}}this.autoGo()},paramsChanged:function(){this.autoGo()},autoChanged:function(){this.autoGo()},autoGo:function(){if(this.auto){this.goJob=this.job(this.goJob,this.go,0)}},go:function(){var args=this.xhrArgs||{};args.body=this.body||args.body;args.params=this.params||args.params;if(args.params&&typeof args.params=="string"){args.params=JSON.parse(args.params)}args.headers=this.headers||args.headers||{};if(args.headers&&typeof args.headers=="string"){args.headers=JSON.parse(args.headers)}var hasContentType=Object.keys(args.headers).some(function(header){return header.toLowerCase()==="content-type"});if(!hasContentType&&this.contentType){args.headers["Content-Type"]=this.contentType}if(this.handleAs==="arraybuffer"||this.handleAs==="blob"||this.handleAs==="document"){args.responseType=this.handleAs}args.withCredentials=this.withCredentials;args.callback=this.receive.bind(this);args.url=this.url;args.method=this.method;this.response=this.error=null;this.activeRequest=args.url&&this.xhr.request(args);return this.activeRequest}});</script>
 </polymer-element>
 
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
 
 <!-- 
   TODO:
@@ -667,23 +669,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
  -->
 
-<polymer-element name="esri_od-search" attributes="url, per_page, autofocus, placeholder, results" assetpath="esri_od-search/">
+<polymer-element name="esri_od-search-field" attributes="autofocus, placeholder, searchString, searchEl" assetpath="esri_od-search-field/">
 
   <template>
-    <style>:host{display:block}core-field{border:2px solid #eee;border-radius:5px}core-field core-icon{color:#aaa}core-field input{width:100%}</style>
+    <style>:host{display:block}core-field{border:2px solid #eee;border-radius:5px}core-field core-icon{color:#aaa}core-field input#search{width:100%;vertical-align:middle!important}core-field .twitter-typeahead{width:100%}.tt-dropdown-menu{width:100%;min-width:300px;box-sizing:border-box;border-radius:4px;border:1px solid #D0CFD4;background-color:#fff}.tt-dropdown-menu .tt-suggestion{padding:2px 10px}.tt-dropdown-menu .tt-suggestion p{line-height:2em;margin:0}.tt-dropdown-menu .tt-suggestion strong{color:#56A5D8}.tt-dropdown-menu .tt-suggestion.tt-cursor{background-color:#D2E9F9}.tt-dropdown-menu .empty-message{padding:10px;color:#56A5D8}</style>
 
-    <form action="{{url}}" autocomplete="off" on-submit="{{onSubmit}}">
+    <form autocomplete="off" on-submit="{{onSubmit}}">
       <div class="search-container">
         <core-field>
           <core-icon icon="search"></core-icon>
           <input type="search" autocomplete="off" autofocus?="{{autofocus}}" id="search" name="search" placeholder="{{placeholder}}" value="{{searchString}}">
         </core-field>
-        <core-ajax id="ajax" name="ajax" url="{{url}}?q={{searchString}}&amp;per_page={{per_page}}" handleas="json" response="{{results}}"></core-ajax>
       </div>
     </form>
   </template>
 
-  <script src="esri_od-search/esri_od-search.js"></script>
+  <script src="esri_od-search-field/esri_od-search-field.js"></script>
 
 </polymer-element>
 </div><div hidden><!--
@@ -727,11 +728,12 @@ Element providing material design circular spinner.
 <polymer-element name="esri_od-search-summary" attributes="searchEl, spinner, results" assetpath="esri_od-search-summary/">
   <template>
     <style>:host{display:block}</style>
-
+    
     <paper-spinner id="spinner"></paper-spinner>
     <template if="{{results.data.length}}">
       <div>Showing <strong>{{results.data.length}}</strong> of <strong>{{results.metadata.stats.total_count}}</strong> matching <strong>{{results.metadata.query_parameters.q}}</strong>.</div>
     </template>
+
   </template>
   
   <script src="esri_od-search-summary/esri_od-search-summary.js"></script>
@@ -782,6 +784,16 @@ Element providing material design circular spinner.
   </template>
   
   <script src="esri_od-search-results/esri_od-search-results.js"></script>
+
+</polymer-element>
+</div><div hidden>
+
+<polymer-element name="esri_od-search" attributes="searchEl, url, per_page" assetpath="esri_od-search/">
+  <template>
+    <core-ajax id="ajax" name="ajax" url="{{url}}?q={{searchString}}&amp;per_page={{per_page}}" handleas="json" response="{{results}}"></core-ajax>
+  </template>
+  
+  <script src="esri_od-search/esri_od-search.js"></script>
 
 </polymer-element>
 </div>

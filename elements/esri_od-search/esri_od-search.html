@@ -1,52 +1,15 @@
-<!-- <link rel="import" href="../../bower_components/polymer/polymer.html"> -->
-<link rel="import" href="../../bower_components/core-icons/core-icons.html">
-<link rel="import" href="../../bower_components/core-icon/core-icon.html">
-<link rel="import" href="../../bower_components/core-field/core-field.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
-<!-- 
-  TODO:
-
-    dataset-details element - composed of several smaller elements
-    autocomplete
-    map results element
-    
-    stuff search results into localstorage?
-    byot (bring your own template) for result items
-    write a story for this... (search agol items?)
-    
- -->
-
-<polymer-element name="esri_od-search" attributes="url, per_page, autofocus, placeholder, results">
-
+<polymer-element name="esri_od-search" attributes="searchEl, url, per_page">
   <template>
-    <link rel="stylesheet" href="esri_od-search.css">
-
-    <form action="{{url}}" 
-          autocomplete="off" 
-          on-submit="{{onSubmit}}">
-      <div class="search-container">
-        <core-field>
-          <core-icon icon="search"></core-icon>
-          <input 
-            type="search" 
-            autocomplete="off" 
-            autofocus?="{{autofocus}}" 
-            id="search" 
-            name="search" 
-            placeholder="{{placeholder}}" 
-            value="{{searchString}}">
-        </core-field>
-        <core-ajax
-          id="ajax"
-          name="ajax"
-          url="{{url}}?q={{searchString}}&per_page={{per_page}}"
-          handleAs="json"
-          response="{{results}}"></core-ajax>
-      </div>
-    </form>
+    <core-ajax
+      id="ajax"
+      name="ajax" 
+      url="{{url}}?q={{searchString}}&per_page={{per_page}}"
+      handleAs="json"
+      response="{{results}}"></core-ajax>
   </template>
-
+  
   <script src="esri_od-search.js"></script>
 
 </polymer-element>
