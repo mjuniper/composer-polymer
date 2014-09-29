@@ -27,9 +27,7 @@
 
     <div class="results-unit">
       <esri_od-search-summary searchEl="#od-search">
-        <template if="{{results.data.length}}">
-          <div>Showing <strong>{{results.data.length}}</strong> of <strong>{{results.metadata.stats.total_count}}</strong> matching <strong>{{results.metadata.query_parameters.q}}</strong>!</div>
-        </template>
+        <template if="{{results.data.length}}"></template>
       </esri_od-search-summary>
       <esri_od-search-results searchEl="#od-search" spinner="false"></esri_od-search-results>
     </div>
